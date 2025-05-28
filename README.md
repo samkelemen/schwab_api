@@ -1,4 +1,4 @@
-** How to use **
+**How to use**
 An example script can be seen in the examples folder. The following methods are implemented, covering all the functionality available on the Charles Schwab Developer API:
 
     string priceHistory(const std::map<string, string>& params);
