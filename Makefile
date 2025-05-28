@@ -1,7 +1,7 @@
-# Makefile — libchschw.a  +  demos example1 … example9
+# Makefile — libschwab_api.a  +  demos example1 … example9
 # ──────────────────────────────────────────────────────────────
 #  layout:
-#     include/chschw.hpp
+#     include/schwab_api.hpp
 #     src/*.cpp
 #     examples/example1.cpp … examples/example9.cpp
 #
@@ -21,7 +21,7 @@ LDFLAGS   := $(shell pkg-config --libs   libcurl)
 LIB_SRC := $(wildcard src/*.cpp)
 OBJDIR  := build
 LIB_OBJ := $(patsubst src/%.cpp,$(OBJDIR)/%.o,$(LIB_SRC))
-LIB     := libchschw.a
+LIB     := libschwab_api.a
 
 # demo sources / objects / executables -------------------------------
 DEMO_SRC := $(wildcard examples/example?.cpp)          # example1 … example9
@@ -39,13 +39,13 @@ $(LIB): $(LIB_OBJ)
 # build any exampleN on demand --------------------------------------
 $(DEMOS): %: $(LIB) $(OBJDIR)/%.o
 	@echo "[LD]  $@"
-	$(CXX) $(OBJDIR)/$*.o -L. -lchschw -o $@ $(LDFLAGS)
+	$(CXX) $(OBJDIR)/$*.o -L. -lschwab_api -o $@ $(LDFLAGS)
 
 # pattern rules for object files ------------------------------------
-$(OBJDIR)/%.o: src/%.cpp include/chschw.hpp | $(OBJDIR)
+$(OBJDIR)/%.o: src/%.cpp include/schwab_api.hpp | $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(OBJDIR)/%.o: examples/%.cpp include/chschw.hpp | $(OBJDIR)
+$(OBJDIR)/%.o: examples/%.cpp include/schwab_api.hpp | $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # make sure build directory exists

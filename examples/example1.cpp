@@ -4,24 +4,27 @@
 //    tokens.json file will be written for subsequent runs.
 
 #include "schwab_api.hpp"
-#include <iostream>
-#include <map>
-#include <string>
+#include "utils.hpp"
 
-int main()
-{
-    const std::string APP_KEY = "APP_KEY"; // Replace with your app key
-    const std::string APP_SECRET = "APP_SECRET"; // Replace with you app secret
-    const std::string CALLBACK = "CALL_BACK"; // Replace with your callback url 
-    const std::string TOKENS_FILE = "tokens.json";
-    const std::chrono::milliseconds TIMEOUT_MS = std::chrono::milliseconds{100000}; // Change this for shorter or longer timeout before giving up on requests
+using namespace std;
 
-    Client client = Client(APP_KEY, APP_SECRET, CALLBACK, TOKENS_FILE, TIMEOUT_MS);
+int main() {
+    Client client(
+        "your-app-key",
+        "your-app-secret",
+        "http://localhost/callback",
+        "tokens.json",
+        chrono::milliseconds(5000)   // 5 s timeout
+    );
 
-    std::string json = client.quotes("AAPL", "quote,fundamental");
-    std::cout << "\nPrice history response:\n" << json << std::endl;
+    // Fetch Apple (AAPL) daily price history for the past year
+    map<string,string> params = {
+        {"symbol",        "AAPL"},
+        {"periodType",    "year"},
+        {"frequencyType", "daily"}
+    };
 
-    while (true);
-
+    string json = client.priceHistory(params);
+    cout << json << endl;
     return 0;
 }
