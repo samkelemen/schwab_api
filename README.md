@@ -1,11 +1,14 @@
-**Overview**
+** How to use **
+An example script can be seen in the examples folder. The following methods are implemented, covering all the functionality available on the Charles Schwab Developer API:
 
-An engine for backtesting derivatives and stock trading strategies.
+    string priceHistory(const std::map<string, string>& params);
+    string optionChains(const std::map<string, string>& params);
+    string optionExpirationChains(const string& symbol);
+    string marketHours(const string& markets, const string& date);
+    string movers(const string& indexSymbol, const string&sort, const int& frequency);
+    string instruments(const string& symbol, const string& projection);
+    string instruments(const string& cupid);
+    string quotes(const string& symbols, const string& fields, const bool& indicative);
+    string quotes(const string& symbol, const string& fields);
 
-**How to use**
-
-To use the simulation engine. A trading stradegy must be implemented which generates buy/sell orders and requests data from the engine to generate these buy/sell orders. Additionally, the market schemas on which to train the data must be specified.
-
-**Project Structure**
-
-The codebase has a modular structure. The core modules are (1.) the interface with the Charles Schwab API, (2.) the data pipeline, which stores, retrieves, and processes data in/from a PostgreSQL database, (3.) the actual simulation engine, which interfaces with the data pipeline and trading model, from which it receives buy/sell orders and gives back the data the model requires to generate buy/sell orders.
+See the official Charles Schwab page for more information. This project is an unnoficial interface to simplify accessing the API in c++.
