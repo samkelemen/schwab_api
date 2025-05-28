@@ -1,4 +1,3 @@
-start of readme
 # Schwab API C++ Client
 
 A lightweight C++20 wrapper for the Charles Schwab Developer REST API, providing easy-to-use methods for fetching market data, option chains, quotes, and more.
